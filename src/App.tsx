@@ -8,11 +8,9 @@ import { useGetMap } from './hooks/useMapReq'
 
 
 export default function App() {
-  const getMap = useGetMap()
+  const loading = useGetMap()
 
-  React.useEffect(() => {
-    getMap()
-  }, [])
+  if (loading) return <p>The map is going to be loaded ...</p>
 
   return (
     <Grid container direction="column">
