@@ -1,0 +1,1 @@
+export type TEntityNumber = 0 | 1 | 2 | 3
