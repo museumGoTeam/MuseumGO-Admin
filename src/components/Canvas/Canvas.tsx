@@ -1,13 +1,14 @@
 import React from 'react'
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import { useAppState } from '../../container/store';
+import useArrayToComp from '../../hooks/useArrayToComp';
 
 const useStyles = makeStyles((theme) => ({
     root: ({ width, height }: { width: number; height: number }) => ({
       width,
       height,
       position: "relative",
-      marginRight: 64,
+      margin: "auto",
+      marginTop: 64
     }),
   }));
 
@@ -18,12 +19,11 @@ type CanvasProps = {
 
 export default function Canvas({ width, height }: CanvasProps) {
     const classes = useStyles({ width, height });
-    const appState = useAppState()
-
+    const cells = useArrayToComp()
     
     return (
-        <div>
-            
+        <div className={classes.root}>
+          {cells}
         </div>
     )
 }
