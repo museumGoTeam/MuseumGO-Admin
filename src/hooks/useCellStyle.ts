@@ -1,14 +1,19 @@
 import React from "react";
 import { ICell } from "../components/Canvas/types";
-import { CELL_SIZE } from "../constants";
+import { ICellState } from "../components/Cell/type";
+import { CELL_SIZE, HOVER_COLOR } from "../constants";
 import { TEntityNumber } from "../constants/types";
 
 export default function useCellStyle({
   cell,
+  cellState
 }: {
   cell: ICell;
+  cellState: ICellState
 }): React.CSSProperties {
+
   const { entity, relativePos } = cell;
+  const { isHovering } = cellState
 
   return {
     position: "absolute",
@@ -17,7 +22,7 @@ export default function useCellStyle({
     left: relativePos.x,
     top: relativePos.y,
     border: "1px solid black",
-    backgroundColor: useRenderEntityColor(entity)
+    backgroundColor: isHovering ? HOVER_COLOR : useRenderEntityColor(entity)
   };
 }
 
