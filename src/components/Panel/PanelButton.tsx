@@ -1,6 +1,8 @@
 import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Button from "../UI/Button";
+import { TEntityNumber } from "../../constants/types";
+import { useAppState } from "../../container/store";
 
 const useStyles = makeStyles((theme) => ({
   rootPanelButton: ({
@@ -20,15 +22,20 @@ const useStyles = makeStyles((theme) => ({
 type PanelButtonProps = {
   label: string;
   indicatorColor: string;
-  selected?: boolean;
-};
+  entityNumber: TEntityNumber;
+  onSelect: (entityNumber: TEntityNumber) => void
+}
 
 export default function PanelButton({
   label,
   indicatorColor,
-  selected,
+  entityNumber,
+  onSelect
 }: PanelButtonProps) {
-  const classes = useStyles({ color: indicatorColor, selected });
+  const appState = useAppState()
+  const entitySelected = appState.entitySelected
 
-  return <Button label={label} className={classes.rootPanelButton} />;
+  const classes = useStyles({ color: indicatorColor, selected: entitySelected === entityNumber });
+
+  return <Button label={label}  onClick={() => onSelect(entityNumber)}  className={classes.rootPanelButton} />;
 }

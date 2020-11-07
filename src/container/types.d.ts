@@ -15,5 +15,5 @@ export interface IAction {
     payload: TPayloadType
 }
 
-type TActionsType = "ON_INIT" | "ON_CELL_ASSIGN"
+type TActionsType = "ON_INIT" | "ON_CELL_ASSIGN" | "ON_ENTITY_SELECT"
 type TPayloadType = TEntityNumber[][] | TEntityNumber | ICell | IPos
