@@ -2,11 +2,14 @@ import React from 'react'
 import PanelButton from './PanelButton'
 import { useDispatch } from '../../container/store'
 import { TEntityNumber } from '../../constants/types'
+import Button from '../UI/Button'
 
 
+type PanelButtonsProps = {
+    onSave: () => void
+}
 
-
-export default function PanelButtons() {
+export default function PanelButtons({onSave}: PanelButtonsProps) {
     const dispatch = useDispatch()
 
     const onSelect = (entityNumber: TEntityNumber) => {
@@ -19,6 +22,7 @@ export default function PanelButtons() {
             <PanelButton label="WALL" indicatorColor="black" entityNumber={1} onSelect={onSelect} />
             <PanelButton label="POINT OF INTEREST" indicatorColor="red" entityNumber={2} onSelect={onSelect}  />
             <PanelButton label="ROOM" indicatorColor="green" entityNumber={3} onSelect={onSelect}  />
+            <Button label="SAVE" color="primary" />
         </div>
     )
 }
