@@ -21,10 +21,11 @@ export default function Cell(props: CellProps) {
     dispatch({ type: "ON_CELL_ASSIGN", payload: props.originPos });
 
   const onClick = () => {
+    let isSaved = true
     if ([2,3].includes(appState.entitySelected)) {
-      if (![2,3].includes(appState.map[props.originPos.y][props.originPos.x]))  saveEntity();
-    }
-    assignType();
+      if (![2,3].includes(appState.map[props.originPos.y][props.originPos.x])) isSaved = saveEntity();
+    } 
+    isSaved && assignType();
   };
   const checkEntity = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (e.buttons === 1 && [0, 1].includes(appState.entitySelected))
@@ -33,7 +34,7 @@ export default function Cell(props: CellProps) {
 
   if ([2, 3].includes(props.entity)) {
     let room;
-    const poi = getPoi(props.originPos);
+    const poi = getPoi({pos: props.originPos, type:"pos"});
     if (!poi) room = getRoom(props.originPos);
 
     if (poi || room) {
