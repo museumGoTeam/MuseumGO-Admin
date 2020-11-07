@@ -15,7 +15,10 @@ const useStyles = makeStyles((theme) => ({
     marginRight: 4,
     marginLeft: 4,
     backgroundColor: selected ? color : "white",
-    color: !selected ? color : "white"
+    color: !selected ? color : "white",
+    "&:hover": {
+      backgroundColor: selected ? color : "white"
+    }
   }),
 }));
 
