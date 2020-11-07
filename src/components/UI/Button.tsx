@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React from "react";
 import { default as MuiButton } from "@material-ui/core/Button";
 
 type ButtonProps = {
