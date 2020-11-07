@@ -13,7 +13,8 @@ export default function App() {
   const appState = useAppState()
   if (loading) return <p>The map is going to be loaded ...</p>
 
-  console.log(appState.pois)
+  console.log("ROOMS: ",appState.rooms)
+  console.log("POIS: ",appState.pois)
 
   return (
     <Grid container direction="column">

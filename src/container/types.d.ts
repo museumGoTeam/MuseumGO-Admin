@@ -1,13 +1,12 @@
-import { IPos, IPOI, ICell } from "../components/Canvas/types";
+import { IPos, IPOI, ICell, IRoom} from "../components/Canvas/types";
 import { TEntityNumber } from "../constants/types";
 
 export interface IAppState {
     map: TEntityNumber[][]
-    originPosSelected: IPos | undefined
-    poiPosSelected: IPos | undefined,
     entitySelected: TEntityNumber
     isPoiFormOpen: boolean,
     pois: IPOI[]
+    rooms: IRoom[]
 }
 
 export interface IAction {
@@ -15,5 +14,5 @@ export interface IAction {
     payload: TPayloadType
 }
 
-type TActionsType = "ON_INIT" | "ON_CELL_ASSIGN" | "ON_ENTITY_SELECT" | "ON_ENTITY_INSERT"
-type TPayloadType = TEntityNumber[][] | TEntityNumber | ICell | IPos | Partial<IPOI>
+type TActionsType = "ON_INIT" | "ON_CELL_ASSIGN" | "ON_ENTITY_SELECT" | "ON_POI_INSERT" | "ON_ROOM_INSERT"
+type TPayloadType = TEntityNumber[][] | TEntityNumber | ICell | IPos | Partial<IPOI> | IRoom

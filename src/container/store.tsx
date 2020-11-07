@@ -4,11 +4,10 @@ import { IAction, IAppState, TActionsType, TPayloadType } from "./types";
 
 const initialValue: IAppState = {
   map: [],
-  originPosSelected: undefined,
-  poiPosSelected: undefined,
   entitySelected: 1,
   isPoiFormOpen: false,
-  pois: []
+  pois: [],
+  rooms: []
 };
 
 const context = createContext<{
