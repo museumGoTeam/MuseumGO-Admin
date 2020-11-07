@@ -6,7 +6,7 @@ const initialValue: IAppState = {
   map: [],
   originPosSelected: undefined,
   poiPosSelected: undefined,
-  entitySelected: undefined,
+  entitySelected: 1,
   isPoiFormOpen: false,
   pois: [],
 };

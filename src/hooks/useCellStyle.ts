@@ -1,6 +1,7 @@
 import React from "react";
 import { ICell } from "../components/Canvas/types";
-import { CELL_SIZE } from "../constants";
+import { ICellState } from "../components/Cell/type";
+import { CELL_SIZE, HOVER_COLOR } from "../constants";
 import { TEntityNumber } from "../constants/types";
 
 export default function useCellStyle({
@@ -8,6 +9,7 @@ export default function useCellStyle({
 }: {
   cell: ICell;
 }): React.CSSProperties {
+
   const { entity, relativePos } = cell;
 
   return {

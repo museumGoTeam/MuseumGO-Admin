@@ -5,7 +5,7 @@ export interface IAppState {
     map: TEntityNumber[][]
     originPosSelected: IPos | undefined
     poiPosSelected: IPos | undefined,
-    entitySelected: TEntityNumber | undefined
+    entitySelected: TEntityNumber
     isPoiFormOpen: boolean,
     pois: IPOI[]
 }
@@ -15,5 +15,5 @@ export interface IAction {
     payload: TPayloadType
 }
 
-type TActionsType = "ON_INIT"
+type TActionsType = "ON_INIT" | "ON_CELL_ASSIGN"
 type TPayloadType = TEntityNumber[][] | TEntityNumber | ICell | IPos
