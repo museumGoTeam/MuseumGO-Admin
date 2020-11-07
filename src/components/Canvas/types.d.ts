@@ -13,8 +13,8 @@ export interface ICell {
 
 export interface IPOI {
     name: string
-    description: string
-    image: string
+    description?: string
+    image?: string
     pos: Pos
 }
 

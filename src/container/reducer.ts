@@ -1,4 +1,4 @@
-import { IPos } from "../components/Canvas/types";
+import { IPOI, IPos } from "../components/Canvas/types";
 import { TEntityNumber } from "../constants/types";
 import { IAction, IAppState } from "./types";
 
@@ -10,6 +10,9 @@ export default function reducer(state: IAppState, action: IAction): IAppState {
     case "ON_ENTITY_SELECT":
       const entitySelected = action.payload as TEntityNumber
       return { ...state, entitySelected}
+    case "ON_ENTITY_INSERT":
+      const poiInserted = action.payload as Partial<IPOI>
+      return { ...state, pois: [...state.pois, ({name: poiInserted.name, pos: poiInserted.pos} as IPOI)]}
     case "ON_CELL_ASSIGN":
       const { x, y } = action.payload as IPos;
       const updatedMap = state.map.map((row, originY) => {
