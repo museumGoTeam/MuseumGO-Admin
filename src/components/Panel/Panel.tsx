@@ -1,9 +1,11 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
 import makeStyles from '@material-ui/core/styles/makeStyles'
+import { message } from 'antd'
 import PanelButtons from './PanelButtons'
 import axios from 'axios'
 import { useAppState } from '../../container/store'
+import { APIRes } from '../../type'
 
 const useStyles = makeStyles(theme => ({
     rootPanel: {
@@ -15,9 +17,12 @@ const useStyles = makeStyles(theme => ({
 export default function Panel() {
     const classes = useStyles()
     const appState = useAppState()
+    
     const onSave = async () => {
-        const res = (await axios.post("/map/save", {cells: appState.map})).data
-        console.log(res)
+        message.loading("The map is saving ... ")
+        const res = (await axios.post<APIRes>("/map/save", {cells: appState.map})).data
+        if (res.success) message.success(res.message)
+        else message.error(res.message)   
     }
 
     return (
