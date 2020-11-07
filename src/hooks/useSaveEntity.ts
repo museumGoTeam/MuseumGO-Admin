@@ -19,7 +19,7 @@ export function useSaveEntity(
 
 
 
-  const saveEntity = () => {
+  const saveEntity = async () => {
     if (isPoiExist || isRoomExist) return;
     let value: string | null = null;
     if (entityNumber === 2)
@@ -28,10 +28,8 @@ export function useSaveEntity(
 
     if (value !== null && entityNumber === 2) {
       dispatch({ type: "ON_POI_INSERT", payload: { name: value, pos } });
-      // TODO:  Insert to database
     } else if (value !== null && entityNumber === 3) {
       dispatch({ type: "ON_ROOM_INSERT", payload: { qrcode: value, pos } });
-      //TODO: Insert to database
     }
   };
 

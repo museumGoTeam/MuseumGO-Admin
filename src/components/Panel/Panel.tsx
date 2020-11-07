@@ -20,7 +20,9 @@ export default function Panel() {
     
     const onSave = async () => {
         message.loading("The map is saving ... ")
-        const res = (await axios.post<APIRes>("/map/save", {cells: appState.map})).data
+        const poiNames = appState.pois.map(poi => poi.name)
+        const roomsQRCodes = appState.rooms.map(room => room.qrcode)
+        const res = (await axios.post<APIRes>("/map", {cells: appState.map, pois:poiNames , rooms: roomsQRCodes})).data
         if (res.success) message.success(res.message)
         else message.error(res.message)   
     }
