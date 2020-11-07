@@ -14,7 +14,7 @@ export default function Cell(props: CellProps) {
 
     const assignType = () => dispatch({type: "ON_CELL_ASSIGN", payload: props.originPos})
     const checkEntity = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        if (e.buttons === 1 && appState.entitySelected === 1) assignType()
+        if (e.buttons === 1 && [0,1].includes(appState.entitySelected)) assignType()
     }
 
 

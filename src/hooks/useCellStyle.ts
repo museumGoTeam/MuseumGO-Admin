@@ -1,7 +1,6 @@
 import React from "react";
 import { ICell } from "../components/Canvas/types";
-import { ICellState } from "../components/Cell/type";
-import { CELL_SIZE, HOVER_COLOR } from "../constants";
+import { CELL_SIZE } from "../constants";
 import { TEntityNumber } from "../constants/types";
 
 export default function useCellStyle({
@@ -30,8 +29,8 @@ function useRenderEntityColor(entity: TEntityNumber): string {
     case 1:
       return "#000000";
     case 2:
-      return "#00ff00";
-    case 3:
       return "#ff0000";
+    case 3:
+      return "#00ff00";
   }
 }

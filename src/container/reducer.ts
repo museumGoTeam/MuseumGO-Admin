@@ -7,6 +7,9 @@ export default function reducer(state: IAppState, action: IAction): IAppState {
     case "ON_INIT":
       const map = action.payload as TEntityNumber[][];
       return { ...state, map };
+    case "ON_ENTITY_SELECT":
+      const entitySelected = action.payload as TEntityNumber
+      return { ...state, entitySelected}
     case "ON_CELL_ASSIGN":
       const { x, y } = action.payload as IPos;
       const updatedMap = state.map.map((row, originY) => {
