@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
-import { TEntityNumber } from "../constants/types";
 import { useDispatch } from "../container/store";
+import { APIResGetMap } from "../type";
 
 export function useGetMap(): boolean {
   const [loading, setLoading] = React.useState(true);
@@ -9,8 +9,8 @@ export function useGetMap(): boolean {
 
   React.useEffect(() => {
     const getMap = async () => {
-      const map: TEntityNumber[][] = (await axios.get("/map")).data;
-      dispatch({ type: "ON_INIT", payload: map });
+      const res: APIResGetMap = (await axios.get("/map")).data;
+      dispatch({ type: "ON_INIT", payload: res });
       setLoading(false)
     };
     getMap()

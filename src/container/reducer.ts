@@ -1,12 +1,13 @@
 import { IPOI, IPos, IRoom } from "../components/Canvas/types";
 import { TEntityNumber } from "../constants/types";
+import { APIResGetMap } from "../type";
 import { IAction, IAppState } from "./types";
 
 export default function reducer(state: IAppState, action: IAction): IAppState {
   switch (action.type) {
     case "ON_INIT":
-      const map = action.payload as TEntityNumber[][];
-      return { ...state, map };
+      const {map, pois, rooms} = action.payload as APIResGetMap;
+      return { ...state, map, pois, rooms };
     case "ON_ENTITY_SELECT":
       const entitySelected = action.payload as TEntityNumber
       return { ...state, entitySelected}
