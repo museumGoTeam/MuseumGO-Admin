@@ -11,14 +11,13 @@ type CellProps = ICell
 export default function Cell(props: CellProps) {
     const { appState, dispatch } = useStore()
     const style = useCellStyle({cell: props})
-    const prompt = useSaveEntity()
+    const saveEntity = useSaveEntity()
 
 
     const assignType = () => dispatch({type: "ON_CELL_ASSIGN", payload: props.originPos})
     const onClick = () => {
         if ([2,3].includes(appState.entitySelected)) {
-            const value = prompt(appState.entitySelected, props.originPos)
-            console.log(value)
+            saveEntity(appState.entitySelected, props.originPos)
         }
         assignType()
     }
