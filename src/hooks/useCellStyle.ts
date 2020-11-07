@@ -6,14 +6,11 @@ import { TEntityNumber } from "../constants/types";
 
 export default function useCellStyle({
   cell,
-  cellState
 }: {
   cell: ICell;
-  cellState: ICellState
 }): React.CSSProperties {
 
   const { entity, relativePos } = cell;
-  const { isHovering } = cellState
 
   return {
     position: "absolute",
@@ -22,7 +19,7 @@ export default function useCellStyle({
     left: relativePos.x,
     top: relativePos.y,
     border: "1px solid black",
-    backgroundColor: isHovering ? HOVER_COLOR : useRenderEntityColor(entity)
+    backgroundColor: useRenderEntityColor(entity)
   };
 }
 

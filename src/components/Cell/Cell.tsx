@@ -1,26 +1,27 @@
 import React from 'react'
+import { useStore } from '../../container/store'
 import useCellStyle from '../../hooks/useCellStyle'
 import { ICell } from '../Canvas/types'
-import { ICellState } from './type'
 
 
 
 type CellProps = ICell
 
 export default function Cell(props: CellProps) {
-    const [state, setState] = React.useState<ICellState>({isHovering: false})
-    const style = useCellStyle({cell: props, cellState: state })
+    const { appState, dispatch } = useStore()
+    const style = useCellStyle({cell: props})
 
 
-
-    const onHover = () => setState({ ...state, isHovering: true })
-    const onLeaveHover = () => setState({ ...state, isHovering: false })
+    const assignType = () => dispatch({type: "ON_CELL_ASSIGN", payload: props.originPos})
+    const checkEntity = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        if (e.buttons === 1 && appState.entitySelected === 1) assignType()
+    }
 
 
     return (
         <div 
         style={style} 
-        onMouseOver={onHover}
-        onMouseLeave={onLeaveHover} />
+        onClick={assignType}
+        onMouseEnter={checkEntity} />
     )
 }
