@@ -1,6 +1,6 @@
 import React, { createContext, PropsWithChildren, useContext, useReducer } from "react";
 import reducer from "./reducer";
-import { IAction, IAppState, TActionsType, TPayloadType } from "./types";
+import { IAction, IAppState } from "./types";
 
 const initialValue: IAppState = {
   map: [],
