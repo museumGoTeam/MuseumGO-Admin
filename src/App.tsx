@@ -9,9 +9,9 @@ import { useGetMap } from './hooks/useMapReq'
 
 export default function App() {
   const loading = useGetMap()
+
+
   if (loading) return <p>The map is going to be loaded ...</p>
-
-
 
   return (
     <Grid container direction="column">
