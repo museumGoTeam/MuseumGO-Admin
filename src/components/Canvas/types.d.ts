@@ -18,6 +18,11 @@ export interface IPOI {
     pos: Pos
 }
 
+export interface IRoom {
+    qrcode: string
+    pos: Pos
+}
+
 
 
 
