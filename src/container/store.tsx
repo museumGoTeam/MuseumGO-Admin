@@ -8,7 +8,7 @@ const initialValue: IAppState = {
   poiPosSelected: undefined,
   entitySelected: 1,
   isPoiFormOpen: false,
-  pois: [],
+  pois: []
 };
 
 const context = createContext<{
