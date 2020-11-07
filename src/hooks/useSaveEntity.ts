@@ -8,13 +8,13 @@ export function useSaveEntity(
   pos: IPos
 ): () => void {
   const dispatch = useDispatch();
-  const getPoi = useGetPoi(pos)
-  const getRoom = useGetRoom(pos)
+  const getPoi = useGetPoi()
+  const getRoom = useGetRoom()
   let isPoiExist: IPOI | undefined;
   let isRoomExist: IRoom | undefined;
 
-  if (entityNumber === 2) isPoiExist = getPoi();
-  if (!isPoiExist && entityNumber === 3) isRoomExist = getRoom();
+  
+
 
 
 
@@ -22,8 +22,7 @@ export function useSaveEntity(
   const saveEntity = async () => {
     if (isPoiExist || isRoomExist) return;
     let value: string | null = null;
-    if (entityNumber === 2)
-      value = window.prompt("Point of interest name", undefined);
+    if (entityNumber === 2) value = window.prompt("Point of interest name", undefined);
     if (entityNumber === 3) value = window.prompt("Room QR code", undefined);
 
     if (value !== null && entityNumber === 2) {

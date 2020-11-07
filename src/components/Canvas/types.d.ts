@@ -7,20 +7,20 @@ export interface IPos {
 
 export interface ICell {
     entity: TEntityNumber,
-    originPos: Pos
-    relativePos: Pos
+    originPos: IPos
+    relativePos: IPos
 }
 
 export interface IPOI {
     name: string
     description?: string
     image?: string
-    pos: Pos
+    pos: IPos
 }
 
 export interface IRoom {
     qrcode: string
-    pos: Pos
+    pos: IPos
 }
 
 

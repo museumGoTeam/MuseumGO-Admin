@@ -19,21 +19,10 @@ export default function reducer(state: IAppState, action: IAction): IAppState {
       return { ...state, rooms: [...state.rooms, roomInserted] }
     case "ON_CELL_ASSIGN":
       const { x, y } = action.payload as IPos;
-      const updatedPois = state.pois.filter(poi => {
-        if (state.entitySelected !== 2) {
-          return poi.pos.x !== x || poi.pos.y !== y
-        }
-        return true
-      })
-      const updatedRooms = state.rooms.filter(room => {
-        if (state.entitySelected !== 3) {
-          return room.pos.x !== x || room.pos.y !== y
-        }
-        return true
-      })
       const updatedMap = state.map.map((row, originY) => {
         if (originY === y) {
           return row.map((entity, originX) => {
+            if ([2,3].includes(entity)) return entity
             if (originX === x) {
               return state.entitySelected;
             }
@@ -42,6 +31,6 @@ export default function reducer(state: IAppState, action: IAction): IAppState {
         }
         return row;
       });
-      return { ...state, map: updatedMap, pois: updatedPois, rooms: updatedRooms}
+      return { ...state, map: updatedMap}
   }
 }

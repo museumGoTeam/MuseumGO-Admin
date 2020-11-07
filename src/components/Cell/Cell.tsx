@@ -13,15 +13,16 @@ export default function Cell(props: CellProps) {
   const style = useCellStyle({ cell: props });
   const saveEntity = useSaveEntity(appState.entitySelected, props.originPos);
 
-  const getPoi = useGetPoi(props.originPos);
-  const getRoom = useGetRoom(props.originPos);
+  const getPoi = useGetPoi();
+  const getRoom = useGetRoom();
+
 
   const assignType = () =>
     dispatch({ type: "ON_CELL_ASSIGN", payload: props.originPos });
 
   const onClick = () => {
-    if ([2, 3].includes(appState.entitySelected)) {
-      saveEntity();
+    if ([2,3].includes(appState.entitySelected)) {
+      if (![2,3].includes(appState.map[props.originPos.y][props.originPos.x]))  saveEntity();
     }
     assignType();
   };
@@ -32,8 +33,8 @@ export default function Cell(props: CellProps) {
 
   if ([2, 3].includes(props.entity)) {
     let room;
-    const poi = getPoi();
-    if (!poi) room = getRoom();
+    const poi = getPoi(props.originPos);
+    if (!poi) room = getRoom(props.originPos);
 
     if (poi || room) {
       return (
