@@ -40,5 +40,5 @@ export default function PanelButton({
 
   const classes = useStyles({ color: indicatorColor, selected: entitySelected === entityNumber });
 
-  return <Button label={label}  onClick={() => onSelect(entityNumber)}  className={classes.rootPanelButton} />;
+  return <Button variant="text" label={label} onClick={() => onSelect(entityNumber)} className={classes.rootPanelButton} />;
 }
