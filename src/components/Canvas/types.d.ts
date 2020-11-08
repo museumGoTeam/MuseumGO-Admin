@@ -23,6 +23,12 @@ export interface IRoom {
     pos: IPos
 }
 
+export interface IMap {
+    map: TEntityNumber[][],
+    pois: IPOI[],
+    rooms: IRoom[]
+}
+
 
 
 
