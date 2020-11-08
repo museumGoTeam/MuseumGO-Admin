@@ -4,7 +4,7 @@ import { TEntityNumber } from "./constants/types";
 export interface APIRes {
     message: boolean
     success: boolean
-    data: IMap
+    data: IMap | IPoi
 }
 
 export interface APIResGetMap {

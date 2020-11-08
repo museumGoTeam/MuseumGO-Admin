@@ -25,7 +25,7 @@ export default function Cell(props: CellProps) {
     let isSaved = true
     if (props.entity === 2) {
       const poi = getPoi({type: "pos", pos: props.originPos})
-      poi && history.push(`/pointOfInterest/${poi._id}`, poi)
+      poi && history.push(`/pointOfInterest/${poi._id}`)
       return
     }
     if ([2,3].includes(appState.entitySelected)) {
