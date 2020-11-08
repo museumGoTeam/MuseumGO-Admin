@@ -12,6 +12,7 @@ export interface ICell {
 }
 
 export interface IPOI {
+    _id: string,
     name: string
     description?: string
     image?: string
@@ -19,6 +20,7 @@ export interface IPOI {
 }
 
 export interface IRoom {
+    _id: string,
     label: string
     pos: IPos
 }
