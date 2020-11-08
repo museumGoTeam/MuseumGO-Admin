@@ -19,8 +19,14 @@ export interface IPOI {
 }
 
 export interface IRoom {
-    qrcode: string
+    label: string
     pos: IPos
+}
+
+export interface IMap {
+    map: TEntityNumber[][],
+    pois: IPOI[],
+    rooms: IRoom[]
 }
 
 
