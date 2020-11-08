@@ -11,6 +11,7 @@ import { IPOI } from '../Canvas/types'
 import axios from 'axios'
 import { APIRes } from '../../type'
 import { message } from 'antd'
+import useUploadImage from '../../hooks/useUploadImage'
 
 
 const useStyles = makeStyles(theme => ({
@@ -28,6 +29,7 @@ const useStyles = makeStyles(theme => ({
 export default function PoiForm() {
     const classes = useStyles()
     const routeParams = useParams<{id: string}>()
+    const uploadImage = useUploadImage()
     const [form, setForm] = React.useState<{loading: boolean, data: IPOI | undefined}>({
         loading: true,
         data: undefined
@@ -52,14 +54,19 @@ export default function PoiForm() {
     }
 
     const onSubmit = async () => {
+       let imageUrl;
        message.loading("The point of interest is updating ...")
-       const res = (await axios.put<APIRes>("/poi", form.data)).data
-       if (res.success) {
-           message.success(res.message)
-           return
+       if (form.data) {
+            if (form.data.image) {
+                imageUrl = await uploadImage(form.data.image as File)
+            }
+            const res = (await axios.put<APIRes>("/poi", {...form.data, image: imageUrl})).data
+            if (res.success) {
+                message.success(res.message)
+                return
+            }
+            message.error(res.message)
        }
-       message.error(res.message)
-
     }
 
     if (form.loading) return <p>Loading ...</p>

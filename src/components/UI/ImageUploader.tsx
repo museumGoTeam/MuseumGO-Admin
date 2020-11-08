@@ -133,7 +133,8 @@ const ImageUploader: React.FC<Props & GridProps> = ({ name, onUpload, value, ...
       >
         {!dragInfo.hasRightFormat &&
           !dragInfo.hasRightFormat &&
-          !dragInfo.isDragFinish && (
+          !dragInfo.isDragFinish && 
+          !image && (
             <React.Fragment>
               <CloudUploadIcon className={classes.uploadIcon} />
               <Typography variant="body1" align="center">
