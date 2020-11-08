@@ -5,7 +5,7 @@ import useArrayToComp from "../../hooks/useArrayToComp";
 const useStyles = makeStyles((theme) => ({
   root: ({ width, height }: { width: number; height: number }) => ({
     width,
-    height,
+    height: 0,
     position: "relative",
     margin: "auto",
     marginTop: 64,
