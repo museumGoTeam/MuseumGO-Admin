@@ -5,6 +5,7 @@ import { useSaveEntity } from "../../hooks/useSaveEntity";
 import { useStore } from "../../container/store";
 import { ICell } from "../Canvas/types";
 import { useGetPoi, useGetRoom } from "../../hooks/useGetEntity";
+import {useHistory} from 'react-router-dom'
 
 type CellProps = ICell;
 
@@ -12,9 +13,9 @@ export default function Cell(props: CellProps) {
   const { appState, dispatch } = useStore();
   const style = useCellStyle({ cell: props });
   const saveEntity = useSaveEntity(appState.entitySelected, props.originPos);
-
   const getPoi = useGetPoi();
   const getRoom = useGetRoom();
+  const history = useHistory()
 
 
   const assignType = () =>
@@ -22,6 +23,11 @@ export default function Cell(props: CellProps) {
 
   const onClick = () => {
     let isSaved = true
+    if (props.entity === 2) {
+      const poi = getPoi({type: "pos", pos: props.originPos})
+      poi && history.push(`/pointOfInterest/${poi._id}`, poi)
+      return
+    }
     if ([2,3].includes(appState.entitySelected)) {
       if (![2,3].includes(appState.map[props.originPos.y][props.originPos.x])) isSaved = saveEntity();
     } 
