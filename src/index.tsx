@@ -1,13 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import StoreProvider from "./container/store";
+import Routes from "./Routes";
 import 'antd/dist/antd.css'
 
 ReactDOM.render(
   <StoreProvider>
-    <App />
+    <Routes />
   </StoreProvider>,
   document.getElementById("root")
 );
