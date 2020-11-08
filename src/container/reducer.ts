@@ -7,7 +7,6 @@ export default function reducer(state: IAppState, action: IAction): IAppState {
   switch (action.type) {
     case "ON_INIT":
       const {map, pois, rooms} = action.payload as APIResGetMap;
-      console.log(map)
       return { ...state, map, pois, rooms };
     case "ON_ENTITY_SELECT":
       const entitySelected = action.payload as TEntityNumber

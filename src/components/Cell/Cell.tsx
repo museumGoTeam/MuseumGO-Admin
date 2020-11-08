@@ -35,11 +35,10 @@ export default function Cell(props: CellProps) {
   if ([2, 3].includes(props.entity)) {
     let room;
     const poi = getPoi({pos: props.originPos, type:"pos"});
-    if (!poi) room = getRoom(props.originPos);
-
+    if (!poi) room = getRoom({pos: props.originPos, type: "pos"});
     if (poi || room) {
       return (
-        <Tooltip title={room ? room.qrcode : poi ? poi.name : ""}>
+        <Tooltip title={room ? room.label : poi ? poi.name : ""}>
           <div style={style} onClick={onClick} onMouseEnter={checkEntity} />
         </Tooltip>
       );

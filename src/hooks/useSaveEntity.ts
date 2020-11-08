@@ -10,6 +10,7 @@ export function useSaveEntity(
 ): () => boolean {
   const dispatch = useDispatch();
   const getPoi = useGetPoi()
+  const getRoom = useGetRoom()
 
   const saveEntity = () => {
     let value: string | null = null;
@@ -27,9 +28,14 @@ export function useSaveEntity(
       return false
     }
     else if (entityNumber === 3) {
-      value = window.prompt("Room QR code");
+      value = window.prompt("Room label");
       if (value && value.length > 0) {
-        dispatch({ type: "ON_ROOM_INSERT", payload: { qrcode: value, pos } });
+        const isExist = getRoom({type: "name", name: value})
+        if (isExist) {
+          message.error("The point of interest already exist")
+          return false
+        }
+        dispatch({ type: "ON_ROOM_INSERT", payload: { label: value, pos } });
         return true
       }
       return false
