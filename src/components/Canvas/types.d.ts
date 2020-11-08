@@ -15,7 +15,7 @@ export interface IPOI {
     _id: string,
     name: string
     description?: string
-    image?: string
+    image?: string | File
     pos: IPos
 }
 

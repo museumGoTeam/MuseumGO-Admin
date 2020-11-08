@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 type Props = {
+  placeholder?: string | undefined
+  value?: string | undefined,
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void,
   fullWidth?: boolean;
   marginHorizontal?: number;
   marginVertical?: number;
@@ -51,9 +54,11 @@ export default function InputArea({
   fullWidth,
   marginHorizontal,
   marginVertical,
+  placeholder,
+  value,
+  onChange,
   className,
-  ...props
-}: Props & React.ThHTMLAttributes<HTMLTextAreaElement>) {
+}: Props) {
   const classes = useStyles();
   return (
     <div
@@ -68,7 +73,7 @@ export default function InputArea({
           : {}
       }
     >
-      <textarea {...props} rows={4}  cols={50} className={classes.input} />
+      <textarea value={value} onChange={onChange} placeholder={placeholder}  rows={4} cols={50} className={classes.input} />
     </div>
   );
 }

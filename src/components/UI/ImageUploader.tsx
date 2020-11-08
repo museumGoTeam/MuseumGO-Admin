@@ -37,11 +37,12 @@ const useStyles = makeStyles((theme) => ({
 
 type Props = {
   name: string;
+  value?: string | undefined
   onUpload: (name: string, file: File) => void;
 };
 
-const ImageUploader: React.FC<Props & GridProps> = ({ name, onUpload, ...rest }) => {
-  const [image, setImage] = React.useState<string | undefined>(undefined);
+const ImageUploader: React.FC<Props & GridProps> = ({ name, onUpload, value, ...rest }) => {
+  const [image, setImage] = React.useState<string | undefined>(value);
   const classes = useStyles({image});
   const theme = useTheme();
   const inputEl = React.useRef<HTMLInputElement>(null);
