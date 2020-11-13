@@ -1,17 +1,18 @@
 import React from 'react'
 import makeStyles from '@material-ui/core/styles/makeStyles'
-import Grid from '@material-ui/core/Grid'
-import Form from '../Form/Form'
-import Button from '../UI/Button'
-import ImageUploader from '../UI/ImageUploader'
-import Input from '../UI/Input'
-import InputArea from '../UI/InputArea'
-import {useParams} from 'react-router-dom'
-import { IPOI } from '../Canvas/types'
+import useUploadImage from '../hooks/useUploadImage'
 import axios from 'axios'
-import { APIRes } from '../../type'
+import Form from '../components/Form/Form'
 import { message } from 'antd'
-import useUploadImage from '../../hooks/useUploadImage'
+import { useParams } from 'react-router-dom'
+import { IPOI } from '../components/Canvas/types'
+import { APIRes } from '../type'
+import ImageUploader from '../components/UI/ImageUploader'
+import Input from '../components/UI/Input'
+import InputArea from '../components/UI/InputArea'
+import Grid from '@material-ui/core/Grid'
+import Button from '../components/UI/Button'
+
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,8 +26,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-
-export default function PoiForm() {
+export default function PoiP() {
     const classes = useStyles()
     const routeParams = useParams<{id: string}>()
     const uploadImage = useUploadImage()

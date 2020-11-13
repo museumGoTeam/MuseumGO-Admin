@@ -1,5 +1,5 @@
 import { message } from "antd";
-import { IPOI, IPos, IRoom } from "../components/Canvas/types";
+import { IPos } from "../components/Canvas/types";
 import { TEntityNumber } from "../constants/types";
 import { useDispatch } from "../container/store";
 import { useGetPoi, useGetRoom } from "./useGetEntity";

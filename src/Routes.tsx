@@ -1,9 +1,8 @@
 import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Layout from './layout'
-import Form from "./components/Form/Form";
 import MapP from "./pages/MapP";
-import PoiForm from "./components/PoiForm/PoiForm";
+import PoiP from "./pages/PoiP";
 
 export default function Routes() {
   return (
@@ -12,7 +11,7 @@ export default function Routes() {
         <Switch>
           <Route exact path="/" render={() => <Redirect to="/map" />} />
           <Route exact path="/map" component={MapP} />
-          <Route exact path="/pointOfInterest/:id" component={PoiForm} />
+          <Route exact path="/pointOfInterest/:id" component={PoiP} />
         </Switch>
       </Layout>
     </BrowserRouter>
