@@ -3,12 +3,14 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 import Grid from '@material-ui/core/Grid'
 import Form from '../components/Form/Form'
 import Input from '../components/UI/Input'
+import Button from '../components/UI/Button'
+import QRCode from 'qrcode.react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { IRoom } from '../components/Canvas/types'
 import { APIRes } from '../type'
 import { message } from 'antd'
-import Button from '../components/UI/Button'
+
 
 const useStyles = makeStyles(() => ({
     button: {
@@ -67,6 +69,7 @@ export default function RoomP() {
 
     return (
         <Form title={`Details of the room ${form.data.label}`}>
+            <QRCode id={form.data._id} value={form.data._id} size={290} level="H" includeMargin={true}   />
             <Input placeholder="label" value={form.data.label} onChange={e => handleChange("label", e.target.value)} marginVertical={8} />
             <Grid item container justify="center">
                 <Button label="save" color="primary" onClick={onSubmit} className={classes.button} />

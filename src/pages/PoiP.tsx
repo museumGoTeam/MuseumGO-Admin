@@ -2,6 +2,7 @@ import React from 'react'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import useUploadImage from '../hooks/useUploadImage'
 import axios from 'axios'
+import QRCode from 'qrcode.react'
 import Form from '../components/Form/Form'
 import { message } from 'antd'
 import { useParams } from 'react-router-dom'
@@ -74,6 +75,7 @@ export default function PoiP() {
 
     return (
         <Form title={`Details of the point of interest ${form.data.name}`}>
+            <QRCode id={form.data._id} value={form.data._id} size={290} level="H" includeMargin={true}   />
             <ImageUploader name="image" value={form.data.image as string} onUpload={(name, value) => handleChange(name, value)} />
             <Input placeholder="name" value={form.data.name} onChange={e => handleChange("name", e.target.value)} marginVertical={8} />
             <InputArea placeholder="description" value={form.data.description ? form.data.description : ""} onChange={e => handleChange("description", e.target.value)} marginVertical={8} />
