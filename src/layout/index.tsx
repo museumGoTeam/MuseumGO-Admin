@@ -20,12 +20,15 @@ const useStyles = makeStyles((theme) => ({
 export default function Layout({ children } : React.PropsWithChildren<any>) {
   const classes = useStyles()
   return (
-    <Grid container direction="column" alignItems="center" className={classes.layoutRoot}>
+    <Grid container direction="column"  alignItems="center" className={classes.layoutRoot}>
         <CssBaseline />
         <Typography variant="h4" className={classes.title}>MuseumGO Administrator Panel </Typography>
+        <Grid item container alignItems="center" justify="center">
         {
             children
         }
+        </Grid>
+
     </Grid>
   )
 

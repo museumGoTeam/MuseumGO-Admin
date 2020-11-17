@@ -32,5 +32,9 @@ function useRenderEntityColor(entity: TEntityNumber): string {
       return "#ff0000";
     case 3:
       return "#00ff00";
+    case 4:
+      return "brown";
+    case 5:
+      return "#f5ff3b"
   }
 }
