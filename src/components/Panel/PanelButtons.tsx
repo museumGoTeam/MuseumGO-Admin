@@ -22,6 +22,8 @@ export default function PanelButtons({onSave}: PanelButtonsProps) {
             <PanelButton label="WALL" indicatorColor="black" entityNumber={1} onSelect={onSelect} />
             <PanelButton label="POINT OF INTEREST" indicatorColor="red" entityNumber={2} onSelect={onSelect}  />
             <PanelButton label="ROOM" indicatorColor="green" entityNumber={3} onSelect={onSelect}  />
+            <PanelButton label="DOOR" indicatorColor="brown" entityNumber={4} onSelect={onSelect}  />
+            <PanelButton label="ITINERARY" indicatorColor="#f5ff3b" entityNumber={5} onSelect={onSelect}  />
             <Button label="SAVE" color="primary" onClick={onSave} />
         </div>
     )

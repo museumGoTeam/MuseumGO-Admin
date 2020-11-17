@@ -37,7 +37,7 @@ export default function Cell(props: CellProps) {
     isSaved && assignType();
   };
   const checkEntity = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (e.buttons === 1 && [0, 1].includes(appState.entitySelected))
+    if (e.buttons === 1 && [0,1,5].includes(appState.entitySelected))
       assignType();
   };
 

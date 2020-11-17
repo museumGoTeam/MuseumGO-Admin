@@ -73,7 +73,7 @@ export default function InputArea({
           : {}
       }
     >
-      <textarea value={value} onChange={onChange} placeholder={placeholder}  rows={4} cols={50} className={classes.input} />
+      <textarea value={value} onChange={onChange} placeholder={placeholder}  rows={10} cols={50} className={classes.input} />
     </div>
   );
 }
