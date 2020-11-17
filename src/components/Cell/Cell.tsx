@@ -27,6 +27,9 @@ export default function Cell(props: CellProps) {
       const poi = getPoi({type: "pos", pos: props.originPos})
       poi && history.push(`/pointOfInterest/${poi._id}`)
       return
+    } else if (props.entity === 3) {
+      const room = getRoom({type: "pos", pos: props.originPos})
+      room && history.push(`/room/${room._id}`)
     }
     if ([2,3].includes(appState.entitySelected)) {
       if (![2,3].includes(appState.map[props.originPos.y][props.originPos.x])) isSaved = saveEntity();
