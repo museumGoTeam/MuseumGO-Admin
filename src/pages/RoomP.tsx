@@ -6,7 +6,7 @@ import Input from '../components/UI/Input'
 import Button from '../components/UI/Button'
 import QRCode from 'qrcode.react'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import { IRoom } from '../components/Canvas/types'
 import { APIRes } from '../type'
 import { message } from 'antd'
@@ -27,6 +27,7 @@ const useStyles = makeStyles(() => ({
 export default function RoomP() {
     const classes = useStyles()
     const routeParams = useParams<{id: string}>()
+    const history = useHistory()
     const [form, setForm] = React.useState<{loading: Boolean, data: IRoom | undefined}>({
         loading: true,
         data: undefined
@@ -67,13 +68,23 @@ export default function RoomP() {
     }
     if (!form.data) return <></>
 
+    const deleteRoom = async  () => {
+        const deleedRoom = (await axios.delete<APIRes>(`/rooms/${form.data?._id}`)).data
+        if (!deleedRoom.success) {
+          message.error(deleedRoom.message)
+          return
+        }
+        message.warning(deleedRoom.message)
+        history.push("/")
+    }
+
     return (
         <Form title={`Details of the room ${form.data.label}`}>
             <QRCode id={form.data._id} value={form.data._id} size={290} level="H" includeMargin={true}   />
             <Input placeholder="label" value={form.data.label} onChange={e => handleChange("label", e.target.value)} marginVertical={8} />
             <Grid item container justify="center">
                 <Button label="save" color="primary" onClick={onSubmit} className={classes.button} />
-                <Button label="delete" className={`${classes.button} ${classes.buttonError}`} />
+                <Button label="delete" onClick={deleteRoom} className={`${classes.button} ${classes.buttonError}`} />
             </Grid>
         </Form>
     )
