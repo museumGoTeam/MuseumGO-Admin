@@ -23,7 +23,8 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 10,
     paddingRight: 10,
     marginBottom: 10,
-    height: 230,
+    height: 320,
+    width: 320,
     backgroundImage: image ? `url("${image}")` : "",
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
@@ -32,6 +33,12 @@ const useStyles = makeStyles((theme) => ({
       cursor: "pointer",
       outline: "none",
     },
+    [theme.breakpoints.down("lg")]: {
+      
+    },
+    [theme.breakpoints.down("sm")]: {
+      height: 300,
+    }
   }),
 }));
 
@@ -98,7 +105,7 @@ const ImageUploader: React.FC<Props & GridProps> = ({ name, onUpload, value, ...
   };
 
   return (
-    <Grid item container justify="center">
+    <>
       <input
         type="file"
         ref={inputEl}
@@ -106,13 +113,7 @@ const ImageUploader: React.FC<Props & GridProps> = ({ name, onUpload, value, ...
         className={classes.inputFile}
       />
       <Grid
-        item
         container
-        xs={12}
-        sm={12}
-        md={6}
-        lg={6}
-        xl={6}
         direction="column"
         alignItems="center"
         justify="center"
@@ -167,7 +168,7 @@ const ImageUploader: React.FC<Props & GridProps> = ({ name, onUpload, value, ...
             </React.Fragment>
           )}
       </Grid>
-    </Grid>
+    </>
   );
 };
 

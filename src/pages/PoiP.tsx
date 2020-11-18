@@ -5,7 +5,7 @@ import axios from "axios";
 import QRCode from "qrcode.react";
 import Form from "../components/Form/Form";
 import { message } from "antd";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { IPOI } from "../components/Canvas/types";
 import { APIRes } from "../type";
 import ImageUploader from "../components/UI/ImageUploader";
@@ -23,11 +23,19 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "red",
     color: "white",
   },
+  qrCode: {
+    [theme.breakpoints.down("sm")]: {
+      width: "64px!important",
+      height: "64px!important"
+    }
+
+  }
 }));
 
 export default function PoiP() {
   const classes = useStyles();
   const routeParams = useParams<{ id: string }>();
+  const history = useHistory()
   const uploadImage = useUploadImage();
   const [form, setForm] = React.useState<{
     loading: boolean;
@@ -75,6 +83,17 @@ export default function PoiP() {
     }
   };
 
+  const onDelete = async () => {
+    const deletedPoi = (await axios.delete<APIRes>(`/poi/${form.data?._id}`)).data
+    if (!deletedPoi.success) {
+      message.error(deletedPoi.message)
+      return
+    }
+    message.warning(deletedPoi.message)
+    history.push("/")
+
+  }
+
   if (form.loading) return <p>Loading ...</p>;
   if (!form.data) return <p>Error</p>;
 
@@ -83,27 +102,15 @@ export default function PoiP() {
       <QRCode
         id={form.data._id}
         value={form.data._id}
-        size={200}
         level="H"
         includeMargin={true}
+        className={classes.qrCode}
       />
-      <Grid
-        item
-        container
-        alignItems="center"
-        direction="column"
-        xs={12}
-        sm={12}
-        md={7}
-        lg={7}
-        xl={7}
-      >
         <ImageUploader
           name="image"
           value={form.data.image as string}
           onUpload={(name, value) => handleChange(name, value)}
         />
-      </Grid>
 
       <Input
         placeholder="name"
@@ -120,13 +127,14 @@ export default function PoiP() {
       <Grid item container justify="center">
         <Button
           label="Save"
-          onClick={onSubmit}
           color="primary"
+          onClick={onSubmit}
           className={classes.button}
         />
         <Button
           label="Delete"
           className={`${classes.button} ${classes.buttonError}`}
+          onClick={onDelete}
         />
       </Grid>
     </Form>

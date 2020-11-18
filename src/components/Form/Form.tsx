@@ -7,14 +7,13 @@ import Typography from '@material-ui/core/Typography'
 const useStyles = makeStyles(theme => ({
     paper: {
         width: "50%",
-        paddingTop: 32,
-        paddingBottom: 32,
-        paddingLeft: 16,
-        paddingRight: 16,
+        paddingBottom: 16,
+        paddingLeft: 8,
+        paddingRight: 8,
+        [theme.breakpoints.down("md")]: {
+            width: "initial"
+        }
     },
-    title: {
-        marginBottom: 16
-    }
 }))
 
 type FormProps = {
@@ -26,7 +25,7 @@ export default function Form( { title, children, className }: React.PropsWithChi
     return (
         <>
             <Grid item container direction="column" alignItems="center" component={Paper}  className={classes.paper}>
-            <Typography variant="h5" className={classes.title}>{title}</Typography>
+            <Typography variant="h5">{title}</Typography>
                 {
                     children
                 }

@@ -1,6 +1,6 @@
 import { IPOI, IPos, IRoom } from "../components/Canvas/types";
 import { TEntityNumber } from "../constants/types";
-import { APIResGetMap } from "../type";
+import { APIResGetMap, APIUpdateMap } from "../type";
 import { IAction, IAppState } from "./types";
 
 export default function reducer(state: IAppState, action: IAction): IAppState {
@@ -17,6 +17,18 @@ export default function reducer(state: IAppState, action: IAction): IAppState {
     case "ON_ROOM_INSERT":
       const roomInserted = action.payload as IRoom
       return { ...state, rooms: [...state.rooms, roomInserted] }
+    case "ON_SAVE":
+      const {pois: poisSaved, rooms: roomsSaved} = action.payload as APIUpdateMap
+      const updatedPois = state.pois.map(poi => {
+        const poiFound = poisSaved.find(poiSaved => poiSaved.name === poi.name)
+        return poiFound ? poiFound : poi
+      })
+      const updatedRooms = state.rooms.map(room => {
+        const roomFound =  roomsSaved.find(roomSaved => roomSaved.label === room.label)
+        return roomFound ? roomFound : room
+      })
+      //console.log({...state, pois: [...state.pois, ...poisSaved], rooms: [...state.rooms, ...roomsSaved]})
+      return {...state, pois: updatedPois, rooms: updatedRooms}
     case "ON_CELL_ASSIGN":
       const { x, y } = action.payload as IPos;
       const updatedMap = state.map.map((row, originY) => {
