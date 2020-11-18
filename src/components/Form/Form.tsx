@@ -7,8 +7,12 @@ import Typography from '@material-ui/core/Typography'
 const useStyles = makeStyles(theme => ({
     paper: {
         width: "50%",
-        paddingTop: 16,
         paddingBottom: 16,
+        paddingLeft: 8,
+        paddingRight: 8,
+        [theme.breakpoints.down("md")]: {
+            width: "initial"
+        }
     },
 }))
 

@@ -23,6 +23,13 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "red",
     color: "white",
   },
+  qrCode: {
+    [theme.breakpoints.down("sm")]: {
+      width: "64px!important",
+      height: "64px!important"
+    }
+
+  }
 }));
 
 export default function PoiP() {
@@ -95,27 +102,15 @@ export default function PoiP() {
       <QRCode
         id={form.data._id}
         value={form.data._id}
-        size={200}
         level="H"
         includeMargin={true}
+        className={classes.qrCode}
       />
-      <Grid
-        item
-        container
-        alignItems="center"
-        direction="column"
-        xs={12}
-        sm={12}
-        md={7}
-        lg={7}
-        xl={7}
-      >
         <ImageUploader
           name="image"
           value={form.data.image as string}
           onUpload={(name, value) => handleChange(name, value)}
         />
-      </Grid>
 
       <Input
         placeholder="name"
