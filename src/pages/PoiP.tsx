@@ -5,7 +5,7 @@ import axios from "axios";
 import QRCode from "qrcode.react";
 import Form from "../components/Form/Form";
 import { message } from "antd";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { IPOI } from "../components/Canvas/types";
 import { APIRes } from "../type";
 import ImageUploader from "../components/UI/ImageUploader";
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function PoiP() {
   const classes = useStyles();
   const routeParams = useParams<{ id: string }>();
+  const history = useHistory()
   const uploadImage = useUploadImage();
   const [form, setForm] = React.useState<{
     loading: boolean;
@@ -75,6 +76,17 @@ export default function PoiP() {
     }
   };
 
+  const onDelete = async () => {
+    const deletedPoi = (await axios.delete<APIRes>(`/poi/${form.data?._id}`)).data
+    if (!deletedPoi.success) {
+      message.error(deletedPoi.message)
+      return
+    }
+    message.warning(deletedPoi.message)
+    history.push("/")
+
+  }
+
   if (form.loading) return <p>Loading ...</p>;
   if (!form.data) return <p>Error</p>;
 
@@ -120,13 +132,14 @@ export default function PoiP() {
       <Grid item container justify="center">
         <Button
           label="Save"
-          onClick={onSubmit}
           color="primary"
+          onClick={onSubmit}
           className={classes.button}
         />
         <Button
           label="Delete"
           className={`${classes.button} ${classes.buttonError}`}
+          onClick={onDelete}
         />
       </Grid>
     </Form>
