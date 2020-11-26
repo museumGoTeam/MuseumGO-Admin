@@ -11,6 +11,9 @@ const useStyles = makeStyles(theme => ({
     rootPanel: {
         paddingTop: 8,
         paddingBottom: 8,
+        [theme.breakpoints.down("sm")]: {
+            justifyContent: "flex-start"
+        }
     }
 }))
 
@@ -30,7 +33,6 @@ export default function Panel() {
         message.error(res.message)   
     }
 
-    console.log(appState)
 
     return (
         <Grid container item justify="center" className={classes.rootPanel}>

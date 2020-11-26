@@ -10,7 +10,10 @@ const useStyles = makeStyles((theme) => ({
       "linear-gradient(171deg, rgba(175,16,85,1) 0%, rgba(86,1,86,1) 100%)",
     height: "100vh",
     maxWidth: "100%",
-    overflowX: "hidden"
+    overflowX: "hidden",
+    [theme.breakpoints.down("sm")]: {
+      alignItems: "flex-start"
+    }
   },
   title: {
     color: "white",
