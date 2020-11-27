@@ -13,6 +13,8 @@ import Input from "../components/UI/Input";
 import InputArea from "../components/UI/InputArea";
 import Grid from "@material-ui/core/Grid";
 import Button from "../components/UI/Button";
+import Modal from "../components/UI/Modal";
+import useDownloadImg from "../hooks/useDownloadImg";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -26,24 +28,29 @@ const useStyles = makeStyles((theme) => ({
   qrCode: {
     [theme.breakpoints.down("sm")]: {
       width: "64px!important",
-      height: "64px!important"
-    }
-
-  }
+      height: "64px!important",
+    },
+  },
 }));
+
+interface PoiPS {
+  loading: boolean;
+  data: IPOI | undefined;
+}
+const initialState = {
+  loading: true,
+  data: undefined,
+};
 
 export default function PoiP() {
   const classes = useStyles();
   const routeParams = useParams<{ id: string }>();
-  const history = useHistory()
+  const history = useHistory();
   const uploadImage = useUploadImage();
-  const [form, setForm] = React.useState<{
-    loading: boolean;
-    data: IPOI | undefined;
-  }>({
-    loading: true,
-    data: undefined,
-  });
+  const downloadImg = useDownloadImg()
+  const anchorRef = React.useRef<HTMLAnchorElement>(null)
+  const [form, setForm] = React.useState<PoiPS>(initialState);
+  const [modalOpen, setModalOpen] = React.useState(false);
 
   React.useEffect(() => {
     const fetchPoi = async () => {
@@ -84,21 +91,38 @@ export default function PoiP() {
   };
 
   const onDelete = async () => {
-    const deletedPoi = (await axios.delete<APIRes>(`/poi/${form.data?._id}`)).data
+    const deletedPoi = (await axios.delete<APIRes>(`/poi/${form.data?._id}`))
+      .data;
     if (!deletedPoi.success) {
-      message.error(deletedPoi.message)
-      return
+      message.error(deletedPoi.message);
+      return;
     }
-    message.warning(deletedPoi.message)
-    history.push("/")
+    message.warning(deletedPoi.message);
+    history.push("/");
+  };
 
+  const onDownload = () => {
+    if (form.data) {
+      downloadImg({ref: anchorRef, documentID: form.data._id, fileName: `point-of-interes-${form.data._id}`})
+    }
   }
+
+  const onModalOpen = () => setModalOpen(true);
+  const onModalClose = () => setModalOpen(false);
 
   if (form.loading) return <p>Loading ...</p>;
   if (!form.data) return <p>Error</p>;
 
   return (
     <Form title={`Details of the point of interest ${form.data.name}`}>
+      <Modal
+        open={modalOpen}
+        onClose={onModalClose}
+        title="Are you sure to delete the point of interest ?"
+        text="The action is irreversible"
+        onYes={onDelete}
+        onNo={onModalClose}
+      />
       <QRCode
         id={form.data._id}
         value={form.data._id}
@@ -106,12 +130,11 @@ export default function PoiP() {
         includeMargin={true}
         className={classes.qrCode}
       />
-        <ImageUploader
-          name="image"
-          value={form.data.image as string}
-          onUpload={(name, value) => handleChange(name, value)}
-        />
-
+      <ImageUploader
+        name="image"
+        value={form.data.image as string}
+        onUpload={(name, value) => handleChange(name, value)}
+      />
       <Input
         placeholder="name"
         value={form.data.name}
@@ -134,8 +157,13 @@ export default function PoiP() {
         <Button
           label="Delete"
           className={`${classes.button} ${classes.buttonError}`}
-          onClick={onDelete}
+          onClick={onModalOpen}
         />
+        <Button 
+        label="Download QR code"
+        className={classes.button}
+        onClick={onDownload} />
+        <a style={{display: "none"}} ref={anchorRef} href="http://google.com">Download</a>
       </Grid>
     </Form>
   );
