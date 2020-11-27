@@ -10,6 +10,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { IRoom } from '../components/Canvas/types'
 import { APIRes } from '../type'
 import { message } from 'antd'
+import useDownloadImg from '../hooks/useDownloadImg'
 
 
 const useStyles = makeStyles(() => ({
@@ -28,6 +29,8 @@ export default function RoomP() {
     const classes = useStyles()
     const routeParams = useParams<{id: string}>()
     const history = useHistory()
+    const downloadImg = useDownloadImg()
+    const anchorRef = React.useRef<HTMLAnchorElement>(null)
     const [form, setForm] = React.useState<{loading: Boolean, data: IRoom | undefined}>({
         loading: true,
         data: undefined
@@ -78,6 +81,12 @@ export default function RoomP() {
         history.push("/")
     }
 
+    const downloadQRCode = () => {
+        if (form.data) {
+            downloadImg({ref: anchorRef, documentID: form.data._id, fileName: `qr-code-room-${form.data._id}`})
+        }
+    }
+
     return (
         <Form title={`Details of the room ${form.data.label}`}>
             <QRCode id={form.data._id} value={form.data._id} size={290} level="H" includeMargin={true}   />
@@ -85,6 +94,8 @@ export default function RoomP() {
             <Grid item container justify="center">
                 <Button label="save" color="primary" onClick={onSubmit} className={classes.button} />
                 <Button label="delete" onClick={deleteRoom} className={`${classes.button} ${classes.buttonError}`} />
+                <Button label="Downlad QR code" color="primary" onClick={downloadQRCode} className={`${classes.button}`} />
+                <a style={{display: "none"}} ref={anchorRef} href="http://google.com">Download</a>
             </Grid>
         </Form>
     )
