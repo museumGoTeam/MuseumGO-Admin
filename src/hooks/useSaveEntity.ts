@@ -22,7 +22,7 @@ export function useSaveEntity(
           message.error("The point of interest already exist")
           return false
         }
-        dispatch({ type: "ON_POI_INSERT", payload: { name: value, pos } });
+        dispatch({ type: "ON_POI_INSERT", payload: { name: value, pos, isConfigured: false } });
         return true
       }
       return false

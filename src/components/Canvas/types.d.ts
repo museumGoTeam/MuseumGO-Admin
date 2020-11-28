@@ -16,6 +16,7 @@ export interface IPOI {
     name: string
     description?: string
     image?: string | File
+    isConfigured: boolean
     pos: IPos
 }
 
