@@ -7,7 +7,9 @@ const initialValue: IAppState = {
   entitySelected: 1,
   isPoiFormOpen: false,
   pois: [],
-  rooms: []
+  rooms: [],
+  poisMoved: [],
+  entityDragging: undefined,
 };
 
 const context = createContext<{
