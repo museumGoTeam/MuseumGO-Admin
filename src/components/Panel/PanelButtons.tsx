@@ -1,30 +1,29 @@
 import React from "react";
-import makeStyles from '@material-ui/core/styles/makeStyles'
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import PanelButton from "./PanelButton";
 import { useDispatch } from "../../container/store";
 import { TEntityNumber } from "../../constants/types";
 import Button from "../UI/Button";
 
-
-const useStyles = makeStyles(theme => ({
-    rootPanelButtons: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-        [theme.breakpoints.down("sm")]: {
-            flexDirection: "column",
-            alignSelf: "flex-start",
-        }
-    }
-}))
+const useStyles = makeStyles((theme) => ({
+  rootPanelButtons: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    [theme.breakpoints.down("sm")]: {
+      flexDirection: "column",
+      alignSelf: "flex-start",
+    },
+  },
+}));
 
 type PanelButtonsProps = {
   onSave: () => void;
 };
 
 export default function PanelButtons({ onSave }: PanelButtonsProps) {
-  const classes = useStyles()
+  const classes = useStyles();
   const dispatch = useDispatch();
 
   const onSelect = (entityNumber: TEntityNumber) => {
@@ -66,6 +65,13 @@ export default function PanelButtons({ onSave }: PanelButtonsProps) {
         description="Insert a door in the grid"
         indicatorColor="brown"
         entityNumber={4}
+        onSelect={onSelect}
+      />
+      <PanelButton
+        label="SELECT"
+        description="Select a room or point of interest to be moved"
+        indicatorColor="orange"
+        entityNumber={6}
         onSelect={onSelect}
       />
       <Button label="SAVE" color="primary" onClick={onSave} />

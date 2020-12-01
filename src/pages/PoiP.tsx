@@ -14,7 +14,7 @@ import InputArea from "../components/UI/InputArea";
 import Grid from "@material-ui/core/Grid";
 import Button from "../components/UI/Button";
 import Modal from "../components/UI/Modal";
-import useDownloadImg from "../hooks/useDownloadImg";
+import { useDownloadImg } from 'react-image-to-file'
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -103,7 +103,7 @@ export default function PoiP() {
 
   const onDownload = () => {
     if (form.data) {
-      downloadImg({ref: anchorRef, documentID: form.data._id, fileName: `point-of-interes-${form.data._id}`})
+      downloadImg({elementID: form.data._id, fileName: `point-of-interes-${form.data._id}`})
     }
   }
 

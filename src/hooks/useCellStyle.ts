@@ -18,11 +18,11 @@ export default function useCellStyle({
     left: relativePos.x,
     top: relativePos.y,
     border: "1px solid black",
-    backgroundColor: useRenderEntityColor(entity)
+    backgroundColor: renderEntityColor(entity)
   };
 }
 
-function useRenderEntityColor(entity: TEntityNumber): string {
+export function renderEntityColor(entity: TEntityNumber): string {
   switch (entity) {
     case 0:
       return "#d1d1d1";
@@ -36,5 +36,7 @@ function useRenderEntityColor(entity: TEntityNumber): string {
       return "brown";
     case 5:
       return "#f5ff3b"
+    case 6:
+      return "orange"
   }
 }

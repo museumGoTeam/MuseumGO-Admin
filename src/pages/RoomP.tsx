@@ -10,7 +10,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { IRoom } from "../components/Canvas/types";
 import { APIRes } from "../type";
 import { message } from "antd";
-import useDownloadImg from "../hooks/useDownloadImg";
+import {useDownloadImg} from "react-image-to-file";
 import Modal from "../components/UI/Modal";
 
 const useStyles = makeStyles(() => ({
@@ -88,8 +88,7 @@ export default function RoomP() {
   const downloadQRCode = () => {
     if (form.data) {
       downloadImg({
-        ref: anchorRef,
-        documentID: form.data._id,
+        elementID: form.data._id,
         fileName: `qr-code-room-${form.data._id}`,
       });
     }
